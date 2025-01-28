@@ -1,5 +1,6 @@
 package com.hariwr.uas.network
 
+import com.hariwr.uas.model.ApiResponse
 import com.hariwr.uas.model.Aset
 import com.hariwr.uas.model.Kategori
 import com.hariwr.uas.model.Pendapatan
