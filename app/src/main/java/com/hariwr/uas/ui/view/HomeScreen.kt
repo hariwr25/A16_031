@@ -30,7 +30,7 @@ import com.hariwr.uas.ui.viewmodel.HomeViewModel
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel(), navController: NavController) {
-// Mengambil data dari LiveData
+    // Mengambil data dari LiveData
     val saldo by viewModel.saldo.observeAsState(0.0)
     val totalPendapatan by viewModel.totalPendapatan.observeAsState(0.0)
     val totalPengeluaran by viewModel.totalPengeluaran.observeAsState(0.0)
@@ -127,4 +127,25 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel(), navController: NavControl
         showDialogNegativeBalance(navController) { showDialog = false }
     }
 }
+
+@Composable
+fun showDialogNegativeBalance(navController: NavController, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Perhatian") },
+        text = { Text("Keuangan Anda sudah minus. Apakah Anda yakin menambah pengeluaran?") },
+        confirmButton = {
+            TextButton(onClick = {
+                navController.navigate("inputPengeluaran")
+                onDismiss() // Menutup dialog setelah navigasi
+            }) {
+                Text("Ya")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Tidak")
+            }
+        }
+    )
 }
