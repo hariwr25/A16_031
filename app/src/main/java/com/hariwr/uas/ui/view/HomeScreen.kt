@@ -1,5 +1,6 @@
 package com.hariwr.uas.ui.view
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -13,4 +14,9 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel(), navController: NavControl
     val saldo by viewModel.saldo.observeAsState(0.0)
     val totalPendapatan by viewModel.totalPendapatan.observeAsState(0.0)
     val totalPengeluaran by viewModel.totalPengeluaran.observeAsState(0.0)
+
+    // Mengatur warna saldo (hijau jika saldo positif, merah jika saldo negatif)
+    val saldoColor =
+        if (saldo >= 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+
 }
