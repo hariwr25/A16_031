@@ -1,5 +1,6 @@
 package com.hariwr.uas.repository
 
+import com.hariwr.uas.model.Aset
 import com.hariwr.uas.model.Kategori
 import com.hariwr.uas.network.ApiService
 
@@ -35,6 +36,40 @@ class RemoteRepository(private val apiService: ApiService) {
         val response = apiService.deleteKategori(kategori)
         if (!response.isSuccessful) {
             throw Exception("Failed to delete category")
+        }
+    }
+
+    // Mengambil daftar aset dari API
+    suspend fun getAset(): List<Aset> {
+        val response = apiService.getAset()
+        if (response.isSuccessful) {
+            return response.body() ?: emptyList()
+        } else {
+            throw Exception("Error fetching assets")
+        }
+    }
+
+    // Menambahkan aset baru melalui API
+    suspend fun tambahAset(aset: Aset) {
+        val response = apiService.tambahAset(aset)
+        if (!response.isSuccessful) {
+            throw Exception("Failed to add asset")
+        }
+    }
+
+    // Memperbarui aset yang ada melalui API
+    suspend fun updateAset(aset: Aset) {
+        val response = apiService.updateAset(aset)
+        if (!response.isSuccessful) {
+            throw Exception("Failed to update asset")
+        }
+    }
+
+    // Menghapus aset melalui API
+    suspend fun deleteAset(aset: Aset) {
+        val response = apiService.deleteAset(aset)
+        if (!response.isSuccessful) {
+            throw Exception("Failed to delete asset")
         }
     }
 }
