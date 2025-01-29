@@ -1,5 +1,6 @@
 package com.hariwr.uas.repository
 
+import com.hariwr.uas.model.Aset
 import com.hariwr.uas.model.Pendapatan
 import com.hariwr.uas.model.Pengeluaran
 import com.hariwr.uas.network.ApiService
@@ -25,6 +26,10 @@ class NetworkRepository(private val apiService: ApiService) {
     // Mengambil data Pendapatan dari API
     suspend fun getPendapatan(): Result<List<Pendapatan>> {
         return makeRequest { apiService.getPendapatan() }
+    }
+    // Mengambil data Aset dari API
+    suspend fun getAset(): Result<List<Aset>> {
+        return makeRequest { apiService.getAset() }
     }
 }
 
