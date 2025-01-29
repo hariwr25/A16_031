@@ -19,4 +19,8 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel(), navController: NavControl
     val saldoColor =
         if (saldo >= 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
 
+    // Mengambil daftar pengeluaran dan pendapatan
+    val pengeluaranList = viewModel.pengeluaranList.observeAsState(listOf()).value
+    val pendapatanList = viewModel.pendapatanList.observeAsState(listOf()).value
+
 }
