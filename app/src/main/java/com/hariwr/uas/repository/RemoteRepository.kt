@@ -3,6 +3,7 @@ package com.hariwr.uas.repository
 import com.hariwr.uas.model.Aset
 import com.hariwr.uas.model.Kategori
 import com.hariwr.uas.model.Pendapatan
+import com.hariwr.uas.model.Pengeluaran
 import com.hariwr.uas.network.ApiService
 
 class RemoteRepository(private val apiService: ApiService) {
@@ -105,6 +106,40 @@ class RemoteRepository(private val apiService: ApiService) {
         val response = apiService.deletePendapatan(pendapatan)
         if (!response.isSuccessful) {
             throw Exception("Failed to delete pendapatan")
+        }
+    }
+
+    // Mengambil daftar pengeluaran dari API
+    suspend fun getPengeluaran(): List<Pengeluaran> {
+        val response = apiService.getPengeluaran()
+        if (response.isSuccessful) {
+            return response.body() ?: emptyList()
+        } else {
+            throw Exception("Error fetching pengeluaran")
+        }
+    }
+
+    // Menambahkan data pengeluaran baru melalui API
+    suspend fun tambahPengeluaran(pengeluaran: Pengeluaran) {
+        val response = apiService.tambahPengeluaran(pengeluaran)
+        if (!response.isSuccessful) {
+            throw Exception("Failed to add pengeluaran")
+        }
+    }
+
+    // Memperbarui data pengeluaran yang ada melalui API
+    suspend fun updatePengeluaran(pengeluaran: Pengeluaran) {
+        val response = apiService.updatePengeluaran(pengeluaran)
+        if (!response.isSuccessful) {
+            throw Exception("Failed to update pengeluaran")
+        }
+    }
+
+    // Menghapus data pengeluaran melalui API
+    suspend fun deletePengeluaran(pengeluaran: Pengeluaran) {
+        val response = apiService.deletePengeluaran(pengeluaran)
+        if (!response.isSuccessful) {
+            throw Exception("Failed to delete pengeluaran")
         }
     }
 }
