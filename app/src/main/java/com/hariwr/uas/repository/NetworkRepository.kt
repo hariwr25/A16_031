@@ -1,5 +1,6 @@
 package com.hariwr.uas.repository
 
+import com.hariwr.uas.model.Pengeluaran
 import com.hariwr.uas.network.ApiService
 
 class NetworkRepository(private val apiService: ApiService) {
@@ -15,5 +16,9 @@ class NetworkRepository(private val apiService: ApiService) {
         } catch (e: Exception) {
             Result.failure(e) // Mengembalikan error jika terjadi exception
         }
+    }
+    // Mengambil data Pengeluaran dari API
+    suspend fun getPengeluaran(): Result<List<Pengeluaran>> {
+        return makeRequest { apiService.getPengeluaran() }
     }
 }
